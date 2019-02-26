@@ -1,0 +1,30 @@
+.table {
+    border-collapse: collapse;
+
+    border: solid 1px black;
+}
+
+
+
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
+.account {
+    width:350px;
+}
+.amount{
+    width:75px;
+}
+.debit{
+    width:75px;
+}
+.credit{
+    width:75px;
+}
+.description{
+
+}

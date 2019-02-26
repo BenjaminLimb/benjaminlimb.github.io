@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Accounting Assistant</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!--https://github.com/wanasit/chrono-->
+    <script src="https://cdn.jsdelivr.net/npm/chrono-node@1.3.5/chrono.min.js"></script>
+    
+    <script src="js/enry.js"></script>
+    <link rel="stylesheet" href="css/entry.css">
+    
+  </head>
+  <body>    
+    <input type = "text" id = "apiUrl"><br>
+    <input type = "button" value = "Costco" onclick="fill()">
+    <input type = "button" value = "Options" onclick="setOptions()">
+
+    <form id="entry" name ="entry" 
+          action="https://script.google.com/macros/s/AKfycbxfyMe5-5hhpE8MDP6JXXRQJV4nZM-4LwA_XUyse9GD/dev" method="post">
+      <input type="hidden" name= "command" value = "PostTransaction">
+      <fieldset>
+        <table border ="1" class="table">
+          <tr><td><label for="date">Date: </label></td><td><input id="date" name="date" placeholder="Date"></td></tr>
+          <tr><td><label for="date">Vendor: </label></td><td><input id="vendor" name="vendor" placeholder="Vendor"></td></tr>               
+        </table>
+        <table border ="1" class="table">
+          <tr>
+            <td>Account</td>
+            <td>Amount</td>
+            <!-- <td>Debit</td> -->
+            <!-- <td>Credit</td> -->
+            <td>Description</td></tr>            
+          <script>
+            for(var i = 0; i < 10; i++)
+            {
+            
+              document.write('<tr>');
+              document.write('<td><input class="account" name="account" placeholder="Account" autocomplete="off" data-row="'+i+'" data-column="0"></td>');
+              document.write('<td><input class="amount" type="text" name="amount" placeholder="Amount" autocomplete="off" data-row="'+i+'" data-column="1"></td>');
+              document.write('<!-- <td><input class="debit" type="text" name="debit"></td> -->');
+              document.write('<!-- <td><input class="credit" type="text" name="credit"></td> -->');
+              document.write(' <td><input class="description" type="text" name="description" placeholder="Description" autocomplete="off" data-row="'+i+'" data-column="2"></td>');
+              document.write('</tr>');            
+            
+            }
+            
+            
+            
+            </script>
+          
+          
+          
+        </table>
+
+        <input type = 'submit'>
+
+      </fieldset>
+
+    </form>
+    <script type="text/javascript">
+      
+      init();
+    </script>
+
+  </body>
+</html>
