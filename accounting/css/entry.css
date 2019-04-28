@@ -4,17 +4,15 @@
     border: solid 1px black;
 }
 
-
-
 .ui-autocomplete {
     max-height: 200px;
     overflow-y: auto;
     /* prevent horizontal scrollbar */
-    overflow-x: hidden;
+    overflow-x: hidden;    
 }
 
 .account {
-    width:350px;
+    width:250px;
 }
 .amount{
     width:75px;
@@ -27,4 +25,17 @@
 }
 .description{
 
+}
+.type{  
+  display: inline-block;
+  width: 50px;
+}
+.status
+{
+  display:inline-block;
+  
+}
+
+.line-id{  
+  
 }
