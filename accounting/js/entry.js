@@ -58,6 +58,104 @@ function checkDate(ob)
     }
 }
 
+function fixMultipleDecimalPoints(string)
+{
+  var parts = string.split(".");
+  var fixedString = "";
+  for (var i = 0; i < parts.length; i++)
+  {        
+    if(i === parts.length -1)
+    {
+      fixedString += ".";
+    }
+    fixedString += parts[i];
+  }
+  return fixedString;
+  
+}
+
+function centEntry(el)
+{
+  
+  var val = el.value;
+  var mode = el.getAttribute("mode");
+  try
+  {
+    console.log(mode);
+    
+    if(val[val.length-1] === "." )
+    {
+      val = val.split(".").join("") + ".";
+      
+      el.value = val;
+      mode = "dollars";
+      el.setAttribute("mode",mode);      
+      return; 
+    }
+    if(val[val.length-1] === " ")
+    {
+      mode = "dollars";
+     el.setAttribute("mode",mode);
+      return;
+    }
+    if(mode !== "dollars")
+    {
+      val = fixMultipleDecimalPoints(val);
+      var decimalIndex =  val.indexOf('.');
+
+      if(decimalIndex == -1) // if no decimal found
+      { 
+        val = Math.round(eval(val))   
+        val = val / 100;       
+      }
+      else
+      {
+        console.log(val);
+        try
+        {
+          num = eval(val)
+        }
+        catch(e)
+        {
+          // If it doesn't eval, just use it as it.
+        }
+        
+        var digitsToRightOfDecimal = val.length - decimalIndex -1;
+        if(digitsToRightOfDecimal > 2)
+        {
+          val = Math.round(num * 1000) 
+          val = val / 100;
+        }
+        else if (digitsToRightOfDecimal < 2)
+        {        
+          val = Math.round(num * 10) 
+          val = val / 100;
+        }
+        else
+        {
+          val = Math.round(num * 100) 
+          val = val / 100;
+        }      
+      }       
+
+      val = val.toFixed(2);
+    }
+      
+    //var newDecimalIndex =  el.value.indexOf('.')
+    //var newDigitsToRightOfDecimal = el.value.length - newDecimalIndex -1;
+    
+    
+  }
+  catch(e)
+  {    
+    console.log(e);
+  }
+  
+  if(val !== NaN)
+  {
+    el.value = val;
+  }    
+}
 function ckAmt(el)
 {
   
@@ -228,7 +326,7 @@ function receiveResponse(response)
   document.getElementById('status').innerHTML=response.Message;
 }
 
-function onSubmitForm()
+function onSave()
 {  
   try
   {
@@ -285,76 +383,68 @@ function readTransaction()
   }
 }
 
-var entryRows = 0;
-function addEntryLine(count)
-{
-  for(var i = 0; i < count; i++)
-  {
-    var row = document.createElement("tr");
-    var html = '<tr>';          
-    html+='<input class="line-id" name="lineId" type="hidden">';
+//function addEntryLine(count)
+//{
+//  for(var i = 0; i < count; i++)
+//  {
+//    var row = document.createElement("tr");
+//    var html = '<tr>';          
+//    html+='<input class="line-id" name="lineId" type="hidden">';
+//
+//    //    html+='<td class="line-id"><input class="line-id" name="lineId" placeholder="Line ID" autocomplete="off" data-row="'+entryRows+'" data-column="0"></td>';
+//    html+='<td><input class="account" name="account" placeholder="Account" autocomplete="off" data-row="'+entryRows+'" data-column="0"></td>';
+//    html+='<td><input class="amount" type="text" name="amount" placeholder="Amount" autocomplete="off" data-row="'+entryRows+'" data-column="1" onchange="ckAmt(this)"></td>';
+//    html+='<td><input class="description" type="text" name="description" placeholder="Description" autocomplete="off" data-row="'+entryRows+'" data-column="2"></td>';
+//    //html+='<td><input class="useTax" type="hidden" name="useTax" data-row="'+entryRows+'" data-column="3"></td>';
+//    html+='</tr>';                
+//    row.innerHTML=html;
+//      
+//  document.getElementById('entriesTable').appendChild(row);
+//  }
+//   entryRows++;
+//   populateAccountDropdowns();
+//   
+//}
 
-    //    html+='<td class="line-id"><input class="line-id" name="lineId" placeholder="Line ID" autocomplete="off" data-row="'+entryRows+'" data-column="0"></td>';
-    html+='<td><input class="account" name="account" placeholder="Account" autocomplete="off" data-row="'+entryRows+'" data-column="0"></td>';
-    html+='<td><input class="amount" type="text" name="amount" placeholder="Amount" autocomplete="off" data-row="'+entryRows+'" data-column="1" onchange="ckAmt(this)"></td>';
-    html+='<td><input class="description" type="text" name="description" placeholder="Description" autocomplete="off" data-row="'+entryRows+'" data-column="2"></td>';
-    //html+='<td><input class="useTax" type="hidden" name="useTax" data-row="'+entryRows+'" data-column="3"></td>';
-    html+='</tr>';                
-    row.innerHTML=html;
-      
-  document.getElementById('entriesTable').appendChild(row);
-  }
-   entryRows++;
-   populateAccountDropdowns();
-   
-}
 
-
-function getFormHtml()
-{
-  let innerHTML = `
-<!--    <input type = "text" id = "apiUrl"><br>-->
-    <input type = "button" value = "Costco" onclick="fill()">
-<!--    <input type = "button" value = "Options" onclick="setOptions()">-->
-  
-    <form id="entry" 
-          name ="entry" 
-          onsubmit="onSubmitForm();return false;">
-      <input type="hidden" name= "command" value = "PostTransaction">      
-      <input type="hidden" id="transactionId" name="transactionId"  readonly>
-  
-  
-        <table border ="1" class="table">
-          <tr>
-            <tr>
-              <!-- <td><label for="transactionId">T ID: </label></td> -->
-              <!-- <td><input type="hidden" id="transactionId" name="transactionId"  readonly></td> -->
-            </tr>            
-            <tr>
-              <td width="50px"><label for="transactionDate">Date: </label></td>
-              <td><input id="transactionDate" name="transactionDate" placeholder="Transaction Date" autocomplete="off" onchange="checkDate(this)"></td>
-              <td><input id="clearedDate" name="clearedDate" placeholder="Cleared Date" autocomplete="off" onchange="checkDate(this)"></td>
-          </tr>
-          <tr>
-            <td><label for="date">Entity: </label></td>
-            <td><input id="entity" class="entity" autocomplete="off" name="entity" placeholder="Entity"></td>
-          </tr>               
-        </table>
-        <table border ="1" class="table" id='entriesTable'>
-          <tr>
-            <!-- <td class = 'line-id'>Line ID</td> -->
-            <td>Account</td>
-            <td>Amount</td>
-            <!-- <td>Debit</td> -->
-            <!-- <td>Credit</td> -->
-            <td>Description</td>
-            <!-- <td>Use Tax Req</td></tr>  -->
-        </table>
-
-        <input type = 'submit'>
-
-    </form>
-`;
-  
-  return innerHTML;
-}
+//
+//
+//function getFormHtml()
+//{
+//  let innerHTML = `
+//<!--    <input type = "text" id = "apiUrl"><br>-->
+//    <input type = "button" value = "Costco" onclick="fill()">
+//<!--    <input type = "button" value = "Options" onclick="setOptions()">-->
+//  
+//    <form id="entry" 
+//          name ="entry" 
+//          onsubmit="onSubmitForm();return false;">
+//      <input type="hidden" name= "command" value = "PostTransaction">      
+//      <input type="hidden" id="transactionId" name="transactionId"  readonly>
+//  Purchase / Deposit Date:<br>
+//  <input id="transactionDate" name="transactionDate" placeholder="Transaction Date" autocomplete="off" onchange="checkDate(this)">
+//  <br><br>
+//  Bank Cleared Date:<br>
+//  <input id="clearedDate" name="clearedDate" placeholder="Cleared Date" autocomplete="off" onchange="checkDate(this)">
+//  <br><br>
+//  <label for="date">Vendor / Person: </label><br>
+//  <input id="entity" class="entity" autocomplete="off" name="entity" placeholder="Entity">
+//  <br><br>
+//        <table border ="1" class="table" id='entriesTable'>
+//          <tr>
+//            <!-- <td class = 'line-id'>Line ID</td> -->
+//            <td>Account</td>
+//            <td>Amount</td>
+//            <!-- <td>Debit</td> -->
+//            <!-- <td>Credit</td> -->
+//            <td>Description</td>
+//            <!-- <td>Use Tax Req</td></tr>  -->
+//        </table>
+//<br>
+//        <input type = 'submit'>
+//
+//    </form>
+//`;
+//  
+//  return innerHTML;
+//}

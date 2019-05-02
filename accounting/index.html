@@ -18,6 +18,7 @@
     <script src="js/gui.js"></script>
             
     <script src="js/entry_templates.js"></script>
+    <script src="js/entryForm.js"></script>
     <script src="js/entry.js"></script>
     <link rel="stylesheet" href="css/entry.css">
     
@@ -31,15 +32,14 @@
 
   <body>    
     <header>      
-    <a href="javascript:App.showEntry()">Add New +</a>
+      <input type ="button" value="Add" onclick="App.showEntry()" />
+      <br>
     </header>
+    <hr>
     <div id="entry">    </div>
     <div id="status">    </div>
-    
 
     <footer></footer>
-    
-    
     
     <script> 
     $(function(){            

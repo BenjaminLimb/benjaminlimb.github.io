@@ -58,14 +58,12 @@ var App = (function(){
   }
 
   exports.init = function()
-  {
-    
-      populateEntityStore();
+  {          
       initializeEntityStore();
+      populateEntityStore();
+      
       initializeAccounts();
       initializeEntities();
-           
-    
     
     apiUrl = localStorage.getItem("apiUrl");
   //document.getElementById("apiUrl").value = apiUrl;
@@ -86,8 +84,7 @@ var App = (function(){
     entryDiv.innerHTML = html;
       addEntryLine(2);
     populateAccountDropdowns();
-    populateEntityDropdowns(); 
-    
+    populateEntityDropdowns();     
     
   }
 
@@ -134,12 +131,6 @@ function saveApiUrl()
   apiUrl = document.getElementById("apiUrl").value;
   localStorage.setItem("apiUrl", apiUrl);
 }
-
-
-
-
-
-
 
 
 
