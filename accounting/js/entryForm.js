@@ -3,7 +3,13 @@ function removeEntryLine(id)
 {
  
   document.getElementById(id).remove();
-  }
+}
+  
+function toggleSign(id)
+{
+  document.getElementById(id).querySelector(".amount").value *= -1;
+  applySignColor(document.getElementById(id).querySelector(".amount"));
+}
 
 var entryRows = 0;
 function addEntryLine(count)
@@ -24,6 +30,8 @@ function addEntryLine(count)
     
     html+='<input class="line-id" name="lineId" type="hidden">';
     html+='<input class="account" name="account" placeholder="Account" autocomplete="off" >';
+    
+    html+='<div class="button small-btn" onclick="toggleSign(\''+row.id+'\')">+/-</div>';
     html+='<input class="amount" type="text" placeholder="$ 0.00" name="amount" placeholder="Amount" autocomplete="off" onkeyup="centEntry(this)">';
     html+='<input class="description" type="text" name="description" placeholder="Description" autocomplete="off">';        
     html+=' <input type="button" value="-" onclick="removeEntryLine(\''+row.id+'\')">';                

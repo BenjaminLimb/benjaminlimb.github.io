@@ -73,11 +73,31 @@ function fixMultipleDecimalPoints(string)
   return fixedString;
   
 }
+function applySignColor(el)
+{
+  
+  var val = el.value;
+  
+  if(val[0] === "-")
+  {
+    el.classList.add("negative");
+    el.classList.remove("positive");
+    
+  }
+  else
+  {
+    el.classList.remove("negative");
+    el.classList.add("positive");
+  
+  }
+}
 
 function centEntry(el)
 {
   
   var val = el.value;
+  applySignColor(el);
+  
   var mode = el.getAttribute("mode");
   try
   {

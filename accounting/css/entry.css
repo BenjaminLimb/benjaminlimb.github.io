@@ -9,10 +9,37 @@
     /* prevent horizontal scrollbar */
     overflow-x: hidden;    
 }
-.description,.account,.amount, .entity, #transactionDate,#clearedDate
+.description,.account,.amount, .entity, #transactionDate,#clearedDate,button
 {
   font-size:15px;
 }
+
+.button {
+        background-color: #000000;
+        color: #FFFFFF;
+        padding: 1px;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        margin:1px;
+        display:inline-block;          
+    }
+    
+    .small-btn {
+        width: 24px;
+        height: 22px;
+    }
+    
+    .negative
+    {
+      background-color: #cb2027;
+    
+    }
+    .positive
+    {
+      background-color: #a4c639
+    }
+
 .account {
     width:300px;    
 }
