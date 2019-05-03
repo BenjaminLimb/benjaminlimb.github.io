@@ -270,7 +270,7 @@ function checkLines()
   } 
 }
 
-document.onkeydown = checkKey;
+//document.onkeydown = checkKey;
 function checkKey(e) {
   e = e || window.event;
   checkLines();

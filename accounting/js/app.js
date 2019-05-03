@@ -84,8 +84,7 @@ var App = (function(){
     entryDiv.innerHTML = html;
       addEntryLine(2);
     populateAccountDropdowns();
-    populateEntityDropdowns();     
-    
+    populateEntityDropdowns();         
   }
 
 

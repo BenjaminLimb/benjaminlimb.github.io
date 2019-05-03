@@ -1,6 +1,5 @@
 .table {
     border-collapse: collapse;
-
     border: solid 1px black;
 }
 
@@ -10,10 +9,14 @@
     /* prevent horizontal scrollbar */
     overflow-x: hidden;    
 }
-
-.account {
-    width:250px;
+.description,.account,.amount, .entity, #transactionDate,#clearedDate
+{
+  font-size:15px;
 }
+.account {
+    width:300px;    
+}
+
 .amount{
     width:75px;
 }
@@ -23,9 +26,7 @@
 .credit{
     width:75px;
 }
-.description{
 
-}
 .type{  
   display: inline-block;
   width: 50px;
@@ -38,4 +39,17 @@
 
 .line-id{  
   
+}
+
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
 }
