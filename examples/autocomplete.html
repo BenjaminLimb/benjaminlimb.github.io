@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <script src="../accounting/js/common.js"></script>
+    <script src="../accounting/js/jsonp.js"></script>
+    <script src="../accounting/js/gsheets.js"></script>
+
+    <script src="../accounting/js/auto-complete.js"></script>
+
+</head>
+<body>
+<script>
+    var body = document.querySelector("body");
+
+    var row = document.createElement("span");
+
+    body.appendChild(row);
+    AutoComplete.render(row,uuidv4(),'Account',null,'id','text');
+
+    var row2 = document.createElement("span");
+    body.appendChild(row2);
+    AutoComplete.render(row2,uuidv4(),'Account',null,'id','text');
+
+
+</script>
+</body>
+</html>

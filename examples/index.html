@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+Number:  <input type ="number">
+Date:  <input type ="date">
+<input type="month">
+Time: <input type="time">
+COlor:<input type="color">
+Search:<input type="search">
+Week:<input type="week">
+
+<script>
+function setValue(option)
+{
+    document.querySelector("[name='accountInput']").value = option.value;
+}
+</script>
+<input type = "text" name="accountInput">
+
+<h1>TEs</h1>
+
+<select name="accountSelect" onchange="setValue(this)" style="width:10px">
+    <optgroup label="Banks">
+        <option value="1">USAA Checking</option>
+        <option value="2">USAA Savings</option>
+        <option value="3">Costco CC</option>
+    </optgroup>
+    <optgroup label="Expense">
+        <option value="4">Food</option>
+        <option value="5">Gas</option>
+        <option value="6">Rent</option>
+        <option value="7">Car Repair</option>
+    </optgroup>
+</select>
+
+<br><br><br><br>
+<select name="accountSelect" onchange="">
+    <optgroup label="Banks">
+        <option value="1">USAA Checking</option>
+        <option value="2">USAA Savings</option>
+        <option value="3">Costco CC</option>
+    </optgroup>
+    <optgroup label="Expense">
+        <option value="4">Food</option>
+        <option value="5">Gas</option>
+        <option value="6">Rent</option>
+        <option value="7">Car Repair</option>
+    </optgroup>
+</select>
+
+    <br><br>
+<hr>
+    <i class="fas fa-arrows-alt-v">TE</i>
+
+</body>
+</html>

@@ -32,16 +32,10 @@
 
   <body>    
     <header>      
-      <input type ="button" value="Add" onclick="App.showEntry()" />
+      <input type = "button" value="Add" onclick="App.showEntry()" />
 <br>
-    Number:  <input type ="number">
-      Date:  <input type ="date">
-      <input type="month">
-      Time: <input type="time">
-      COlor:<input type="color">
-      Search:<input type="search">
-      Week:<input type="week">
-      <input type ="button" value="AutoComplete" onclick="AutoComplete.render()" />
+
+      <input type = "button" value="AutoComplete" onclick="AutoComplete.render(null,uuidv4(),'Account')" />
       <br>
     </header>
     <hr>

@@ -1,7 +1,6 @@
 
 function removeEntryLine(id)
 {
- 
   document.getElementById(id).remove();
 }
   
@@ -18,7 +17,6 @@ function removeEntryLine()
     {
     document.getElementById('entriesTable').lastChild.remove();
     }
-
 }
 
 
@@ -34,21 +32,29 @@ function addEntryLine(count)
   for(var i = 0; i < count; i++)
   {
     var row = document.createElement("div");
+
+    let accounts = App.getAccounts();
+    console.log(accounts);
+    AutoComplete.render(row,uuidv4(),'Account',accounts,'value','label');
+
     row.id = uuidv4();
+    row.classList.add("inline");
       
+    var rowData = document.createElement("div");
+    rowData.classList.add("inline");
+
     //row.setAttribute("data-entry-line",index);
     var html = '';      
     
     html+='<input class="line-id" name="lineId" type="hidden">';
     html+='<input class="account" name="account" placeholder="Account" autocomplete="off" >';
-    
-
     html+='<input class="amount" type="text" placeholder="$ 0.00" name="amount" placeholder="Amount" autocomplete="off" onkeyup="centEntry(this)">';
     html+='<div class="button small-btn" onclick="toggleSign(\''+row.id+'\')">+/-</div>';
     html+='<input class="description" type="text" name="description" placeholder="Description" autocomplete="off">';
 //    html+=' <input type="button" value="-" onclick="removeEntryLine(\''+row.id+'\')">';
     html+="<br><br>"
-    row.innerHTML=html;
+    rowData.innerHTML=html;
+    row.appendChild(rowData);
       
   document.getElementById('entriesTable').appendChild(row);
   }
@@ -68,8 +74,8 @@ function getFormHtml()
   <input type="radio" id="purchase" name="type" value="purchase"  checked>  <label for="purchase">Purchase</label>
   <input type="radio" id="return" name="type" value="return"  >  <label for="return">Return</label>
   <input type="radio" id="transfer" name="type" value="transfer"  >  <label for="transfer">Transfer</label>
+  <input type="radio" id="journal" name="type" value="journal"  >  <label for="journal">Journal</label>
   <br><br>
-    
   <form id="entry" name ="entry" onsubmit="return false;">
   <input type="hidden" name= "command" value = "PostTransaction">      
   <input type="hidden" id="transactionId" name="transactionId"  readonly>
@@ -84,8 +90,7 @@ function getFormHtml()
   <br><br>
   <label for="date">Amount: </label><br>
   <input class="amount" type="text" placeholder="$ 0.00" name="amount" placeholder="Amount" autocomplete="off" onkeyup="centEntry(this)">
-  
-  <br><br>From / To
+  <br><br>Funding Source
         <div border ="1" id='entriesTable'>  
 </div>
   <input type="button" value="Add +" onclick="addEntryLine(1)">

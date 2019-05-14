@@ -1,3 +1,5 @@
+
+
 .table {
     border-collapse: collapse;
     border: solid 1px black;
@@ -13,7 +15,9 @@
 {
   font-size:15px;
 }
-
+div.inline{
+    display:inline;
+}
 .button {
         background-color: #000000;
         color: #FFFFFF;
